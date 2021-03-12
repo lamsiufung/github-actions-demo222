@@ -1,18 +1,24 @@
-name: Greeting from Lam Siu Fung
-on: push
+name: CI
+on:
+        push:
+                branches: [master]
+        pull_request:
+                branches: [master]
 
 
-jobs:
-        my-job:
-                name:My job
-        runs-on: ubuntu-latest
-        steps:
-                -name: Print a greating
-                env:
-                        MY_VAR: Hi there! My name is
-                        FIRST_NAME: Lam
-                        MIDDLE_NAME: Siu
-                        LAST_NAME: Fung
-                 run: |
-                         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
-                         
+        workflow_dispatch:
+
+     jobs:
+             build:
+                     runs-on: ubuntu-latest
+
+                     steps:
+                             - uses: actions/checkout@v2
+
+                             - name: Run a one-line script
+                               run: echo Hello, world!
+
+                             - name: Run a multi-line script
+                               run:
+                                       echo Add other acrions to build,
+                                       echo test, and deploy your project.
